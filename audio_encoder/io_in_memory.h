@@ -11,10 +11,10 @@
 
 #include <libavformat/avformat.h>
 
-//typedef struct BufferData {
-//    uint8_t *buf;
-//    size_t   size;
-//} BufferData;
+typedef struct BufferData {
+    uint8_t *buf;  /// begin ptr of buffer block
+    size_t   size; /// size of buffer block
+} BufferData;
 
 
 /**
@@ -22,8 +22,9 @@
  */
 typedef struct BufferIO {
     uint8_t *buf;
-    size_t   total; // total size of buffer
-    size_t   curr;  // current position
+    size_t   curr;   /// current position
+    size_t   size;   /// real size of used buffer
+    size_t   _total; /// private, total size of allocated buffer, _total >= size
 } BufferIO;
 
 
@@ -51,7 +52,8 @@ int init_io_context_default(AVFormatContext *format_context, int write_flag, Buf
  * @param read_packet  A function for refilling the buffer, may be NULL.
  * @param write_packet A function for writing the buffer contents, may be NULL.
  *        The function may not change the input buffers content.
- * @param seek A function for seeking to specified byte position, may be NULL.
+ * @param seek A function for seeking to specified byte position, may be NULL,
+ *        Note: It returns new position on success instead of zero.
  *
  * @return 0 on success or negative on error.
  */

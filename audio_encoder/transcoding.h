@@ -9,6 +9,26 @@
 #ifndef transcoding_h
 #define transcoding_h
 
-int transcoding(const char *inputfile, const char *outputfile);
+#include <stdint.h>
+
+#include "io_in_memory.h"
+
+
+/** Target audio's args
+ *
+ *  bit_rate controls the compression rate of target audio
+ *
+ *  format_name is the target media container's name,
+ *  see all supported formats name by executing `ffmpeg -formats`
+ *
+ */
+typedef struct TranscodingArgs {
+    int64_t bit_rate;
+    char   *format_name;
+} TranscodingArgs;
+
+
+int transcoding(BufferData *p_dst_buf, const TranscodingArgs *args, const BufferData src_buf);
+
 
 #endif /* transcoding_h */

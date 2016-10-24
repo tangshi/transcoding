@@ -38,17 +38,6 @@ int init_io_context_custom(AVFormatContext *fmt_ctx,
     fmt_ctx->pb = avio_ctx; // set I/O context for **fmt_ctx**
 
     return 0;
-
-    //    int ret = avformat_open_input(&fmt_ctx, NULL, NULL, NULL);
-    //    if (ret < 0) {
-    //        fprintf(stderr, "Could not open input stream\n");
-    //        av_free(&avio_ctx->buffer);
-    //        av_free(&avio_ctx);
-    //        return ret;
-    //    }
-    //    else {
-    //        return 0;
-    //    }
 }
 
 
@@ -64,13 +53,13 @@ int init_io_context_default(AVFormatContext *fmt_ctx, int write_flag, BufferIO *
 }
 
 static int m_read_packet(void *opaque, uint8_t *buf, int buf_size) {
+
     BufferIO *bio = (BufferIO *)opaque;
-    int left_size = (int)(bio->total - bio->curr);
+    int left_size = (int)(bio->size - bio->curr);
     buf_size = FFMIN(buf_size, left_size);
 
-    /* copy internal buffer data to buf */
-    memcpy(buf, bio->buf, buf_size);
-    bio->buf  += buf_size;
+    uint8_t *ptr = bio->buf + bio->curr;
+    memcpy(buf, bio->buf + bio->curr, buf_size);
     bio->curr += buf_size;
 
     return buf_size;
@@ -80,11 +69,11 @@ static int m_write_packet(void *opaque, uint8_t *buf, int buf_size) {
 
     BufferIO *bio = (BufferIO *)opaque;
 
-    if (bio->curr + buf_size > bio->total) {
+    if (bio->curr + buf_size > bio->_total) {
 
         size_t new_total;
         do {
-            new_total = bio->total * 3 / 2;
+            new_total = buf_size + bio->_total * 3 / 2;
         } while (bio->curr + buf_size > new_total);
 
         uint8_t *ptr = (uint8_t *)realloc(bio->buf, new_total);
@@ -94,11 +83,16 @@ static int m_write_packet(void *opaque, uint8_t *buf, int buf_size) {
         }
         else {
             bio->buf = ptr;
-            bio->total = new_total;
+            bio->_total = new_total;
         }
     }
 
     memcpy(bio->buf + bio->curr, buf, buf_size);
+
+    if (bio->curr + buf_size > bio->size) {
+        bio->size = bio->curr + buf_size;
+    }
+
     bio->curr += buf_size;
     
     return buf_size;
@@ -117,16 +111,13 @@ static int64_t m_seek(void *opaque, int64_t offset, int whence) {
             new_pos = bio->curr + offset;
             break;
         case SEEK_END:
-            new_pos = bio->total + offset;
+            new_pos = bio->size + offset;
             break;
         default:
             return AVERROR(EINVAL);
     }
 
-    int64_t final_pos = FFMIN(new_pos, bio->total);
-
-    bio->buf = bio->buf + (final_pos - bio->curr);
-    bio->curr = final_pos;
+    bio->curr = FFMIN(new_pos, bio->size);
     
-    return final_pos;
+    return bio->curr;
 }
