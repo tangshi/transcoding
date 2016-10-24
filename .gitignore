@@ -1,4 +1,6 @@
 0.out.*
+*.mp3
+*.wav
 
 # Xcode
 #
