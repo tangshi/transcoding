@@ -1,13 +1,12 @@
 //
 //  transcoding.h
-//  audio_encoder
 //
 //  Created by tangshi on 16/10/19.
 //  Copyright © 2016年 tangshi. All rights reserved.
 //
 
-#ifndef transcoding_h
-#define transcoding_h
+#ifndef transcoding_transcoding_h
+#define transcoding_transcoding_h
 
 #include <stdint.h>
 

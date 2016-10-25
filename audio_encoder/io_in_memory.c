@@ -1,11 +1,3 @@
-//
-//  utils.c
-//  audio_encoder
-//
-//  Created by tangshi on 16/10/18.
-//  Copyright © 2016年 tangshi. All rights reserved.
-//
-
 #include "io_in_memory.h"
 
 #include <libavformat/avio.h>

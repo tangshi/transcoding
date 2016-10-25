@@ -1,6 +1,5 @@
 //
 //  main.c
-//  audio_encoder
 //
 //  Created by tangshi on 16/10/19.
 //  Copyright © 2016年 tangshi. All rights reserved.

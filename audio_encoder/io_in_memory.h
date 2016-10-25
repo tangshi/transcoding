@@ -1,13 +1,12 @@
 //
-//  utils.h
-//  audio_encoder
+//  io_in_memory.h
 //
 //  Created by tangshi on 16/10/18.
 //  Copyright © 2016年 tangshi. All rights reserved.
 //
 
-#ifndef io_in_memory_h
-#define io_in_memory_h
+#ifndef transcoding_io_in_memory_h
+#define transcoding_io_in_memory_h
 
 #include <libavformat/avformat.h>
 
@@ -66,5 +65,5 @@ int init_io_context_custom(AVFormatContext *format_context,
                            int64_t (*seek)(void *opaque, int64_t offset, int whence));
 
 
-#endif /* io_in_memory_h */
+#endif /* transcoding_io_in_memory_h */
 
