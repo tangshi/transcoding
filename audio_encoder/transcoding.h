@@ -16,7 +16,7 @@
 /**
  Target audio args
  
- @bit_rate: controls the compression rate of target audio
+ @bit_rate: controls the compression rate of target audio, pass 0 to use default value
  @format_name: target media container name,
   see all supported formats name by executing `ffmpeg -formats`
  */

@@ -64,7 +64,8 @@ static int m_write_packet(void *opaque, uint8_t *buf, int buf_size) {
 
         size_t new_total;
         do {
-            new_total = buf_size + bio->_total * 3 / 2;
+            // additional buf_size in case null pointer crash.
+            new_total =  bio->_total * 3 / 2 + buf_size;
         } while (bio->curr + buf_size > new_total);
 
         uint8_t *ptr = (uint8_t *)realloc(bio->buf, new_total);
