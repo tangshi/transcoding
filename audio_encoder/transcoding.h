@@ -14,13 +14,12 @@
 #include "io_in_memory.h"
 
 
-/** Target audio's args
- *
- *  bit_rate controls the compression rate of target audio
- *
- *  format_name is the target media container's name,
- *  see all supported formats name by executing `ffmpeg -formats`
- *
+/**
+ Target audio args
+ 
+ @bit_rate: controls the compression rate of target audio
+ @format_name: target media container name,
+  see all supported formats name by executing `ffmpeg -formats`
  */
 typedef struct TranscodingArgs {
     int64_t bit_rate;
@@ -28,7 +27,16 @@ typedef struct TranscodingArgs {
 } TranscodingArgs;
 
 
-int transcoding(BufferData *p_dst_buf, const TranscodingArgs *args, const BufferData src_buf);
+/**
+ transcoding audio format in memory
+
+ @param[in,out] p_dst_buf pointer to output audio buffer
+ @param args target audio format args
+ @param src_buf source audio buffer
+
+ @return 0 on success or negative on error
+ */
+int transcoding(BufferData *p_dst_buf, const TranscodingArgs args, const BufferData src_buf);
 
 
 #endif /* transcoding_h */

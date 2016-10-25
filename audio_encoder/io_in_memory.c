@@ -58,7 +58,6 @@ static int m_read_packet(void *opaque, uint8_t *buf, int buf_size) {
     int left_size = (int)(bio->size - bio->curr);
     buf_size = FFMIN(buf_size, left_size);
 
-    uint8_t *ptr = bio->buf + bio->curr;
     memcpy(buf, bio->buf + bio->curr, buf_size);
     bio->curr += buf_size;
 
