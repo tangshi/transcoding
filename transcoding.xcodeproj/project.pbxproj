@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09A9C71B1DC09FE2007EEB91 /* demo.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A9C7181DC09FE2007EEB91 /* demo.c */; };
+		09A9C71C1DC09FE2007EEB91 /* io_in_memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A9C7191DC09FE2007EEB91 /* io_in_memory.c */; };
+		09A9C71D1DC09FE2007EEB91 /* transcoding.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A9C71A1DC09FE2007EEB91 /* transcoding.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		09A9C70A1DC09F79007EEB91 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		09A9C70C1DC09F79007EEB91 /* transcoding */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = transcoding; sourceTree = BUILT_PRODUCTS_DIR; };
+		09A9C7161DC09FD5007EEB91 /* io_in_memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = io_in_memory.h; path = include/io_in_memory.h; sourceTree = "<group>"; };
+		09A9C7171DC09FD5007EEB91 /* transcoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transcoding.h; path = include/transcoding.h; sourceTree = "<group>"; };
+		09A9C7181DC09FE2007EEB91 /* demo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = demo.c; path = src/demo.c; sourceTree = "<group>"; };
+		09A9C7191DC09FE2007EEB91 /* io_in_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = io_in_memory.c; path = src/io_in_memory.c; sourceTree = "<group>"; };
+		09A9C71A1DC09FE2007EEB91 /* transcoding.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transcoding.c; path = src/transcoding.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		09A9C7091DC09F79007EEB91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		09A9C7031DC09F79007EEB91 = {
+			isa = PBXGroup;
+			children = (
+				09A9C70E1DC09F79007EEB91 /* transcoding */,
+				09A9C70D1DC09F79007EEB91 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		09A9C70D1DC09F79007EEB91 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09A9C70C1DC09F79007EEB91 /* transcoding */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		09A9C70E1DC09F79007EEB91 /* transcoding */ = {
+			isa = PBXGroup;
+			children = (
+				09A9C7181DC09FE2007EEB91 /* demo.c */,
+				09A9C7191DC09FE2007EEB91 /* io_in_memory.c */,
+				09A9C71A1DC09FE2007EEB91 /* transcoding.c */,
+				09A9C7161DC09FD5007EEB91 /* io_in_memory.h */,
+				09A9C7171DC09FD5007EEB91 /* transcoding.h */,
+			);
+			path = transcoding;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		09A9C70B1DC09F79007EEB91 /* transcoding */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09A9C7131DC09F79007EEB91 /* Build configuration list for PBXNativeTarget "transcoding" */;
+			buildPhases = (
+				09A9C7081DC09F79007EEB91 /* Sources */,
+				09A9C7091DC09F79007EEB91 /* Frameworks */,
+				09A9C70A1DC09F79007EEB91 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = transcoding;
+			productName = transcoding;
+			productReference = 09A9C70C1DC09F79007EEB91 /* transcoding */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		09A9C7041DC09F79007EEB91 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = tangshi;
+				TargetAttributes = {
+					09A9C70B1DC09F79007EEB91 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 09A9C7071DC09F79007EEB91 /* Build configuration list for PBXProject "transcoding" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 09A9C7031DC09F79007EEB91;
+			productRefGroup = 09A9C70D1DC09F79007EEB91 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				09A9C70B1DC09F79007EEB91 /* transcoding */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		09A9C7081DC09F79007EEB91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09A9C71D1DC09FE2007EEB91 /* transcoding.c in Sources */,
+				09A9C71B1DC09FE2007EEB91 /* demo.c in Sources */,
+				09A9C71C1DC09FE2007EEB91 /* io_in_memory.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		09A9C7111DC09F79007EEB91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lavformat",
+					"-lavcodec",
+					"-lavutil",
+					"-lswresample",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		09A9C7121DC09F79007EEB91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lavformat",
+					"-lavcodec",
+					"-lavutil",
+					"-lswresample",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		09A9C7141DC09F79007EEB91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		09A9C7151DC09F79007EEB91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		09A9C7071DC09F79007EEB91 /* Build configuration list for PBXProject "transcoding" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09A9C7111DC09F79007EEB91 /* Debug */,
+				09A9C7121DC09F79007EEB91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		09A9C7131DC09F79007EEB91 /* Build configuration list for PBXNativeTarget "transcoding" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09A9C7141DC09F79007EEB91 /* Debug */,
+				09A9C7151DC09F79007EEB91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 09A9C7041DC09F79007EEB91 /* Project object */;
+}
