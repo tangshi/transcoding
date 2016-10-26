@@ -2,12 +2,21 @@
 
 prefix_dir=`pwd`
 
-cd ffmpeg
+tar -xzf ./src/lame-3.99.5.tar.gz -C .
+cd lame-3.99.5
+./configure --prefix=$prefix_dir --enable-shared=yes --enable-static=no
+make && make install
+
+cd ..
+tar -xzf ./src/FFmpeg-n3.1.2.tar.gz -C .
+cd FFmpeg-n3.1.2
 
 ./configure --prefix=$prefix_dir \
             --disable-doc \
             --enable-nonfree \
-            --extra-cflags="-march=native" \
+            --enable-gpl \
+            --extra-cflags="-march=native -I$prefix_dir/include" \
+            --extra-ldflags="-L$prefix_dir/lib" \
             --disable-yasm \
             --disable-debug \
             --disable-static \
@@ -27,6 +36,7 @@ cd ffmpeg
             --disable-vda \
             --disable-vdpau \
             --disable-videotoolbox \
+            --enable-libmp3lame \
             --disable-everything \
             --enable-demuxer=aac,ac3,ape,asf,eac3,flac,mp3,ogg,pcm_alaw,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,wav \
             --enable-decoder=aac,ac3,ape,eac3,flac,mp1,mp2,mp3,opus,pcm_alaw,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16be_planar,pcm_s16le,pcm_s16le_planar,pcm_s24be,pcm_s24daud,pcm_s24le,pcm_s24le_planar,pcm_s32be,pcm_s32le,pcm_s32le_planar,pcm_s8,pcm_s8_planar,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,vorbis,wavpack,wmalossless,wmapro,wmav1,wmav2,wmavoice \
@@ -39,3 +49,8 @@ make && make install
 cd ..
 
 gcc ./src/io_in_memory.c ./src/transcoding.c -std=c99 -shared -fpic -O2 -I$prefix_dir/include -L$prefix_dir/lib -lavutil -lavcodec -lavformat -lswresample -o $prefix_dir/lib/libtranscoding.so
+
+rm -rf bin
+rm -rf share
+rm -rf lame-3.99.5
+rm -rf FFmpeg-n3.1.2
