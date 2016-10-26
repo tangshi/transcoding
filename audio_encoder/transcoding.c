@@ -120,7 +120,9 @@ static int open_output_stream(const TranscodingArgs args, BufferIO * bio,
     enum AVCodecID encoder_id = AV_CODEC_ID_NONE;
 
     // Create a new format context for the output container format.
-    if ( (error = avformat_alloc_output_context2(output_format_context, NULL, args.format_name, NULL)) < 0) {
+    char outname[16] = "o.";
+    av_strlcpy(outname+2, args.format_name, 14);
+    if ( (error = avformat_alloc_output_context2(output_format_context, NULL, NULL, outname)) < 0) {
         fprintf(stderr, "Could not allocate output format context.\n");
         return error;
     }
@@ -198,7 +200,6 @@ static int open_output_stream(const TranscodingArgs args, BufferIO * bio,
 
 cleanup:
     avcodec_free_context(&avctx);
-    avio_closep(&(*output_format_context)->pb);
     avformat_free_context(*output_format_context);
     *output_format_context = NULL;
     return error < 0 ? error : AVERROR_EXIT;

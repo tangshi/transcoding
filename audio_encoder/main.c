@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
 
         BufferData dst_buf;
         TranscodingArgs args;
-        args.bit_rate = 64000;
+        args.bit_rate = 0;
         args.format_name = "mp3";
 
         transcoding(&dst_buf, args, src_buf);
