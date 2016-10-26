@@ -2,6 +2,13 @@
 *.mp3
 *.wav
 
+*.dylib
+*.so
+*.pc
+*/include/lib*/*
+
+*.tar.gz
+
 # Xcode
 #
 build/
