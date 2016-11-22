@@ -8,6 +8,9 @@
 */include/lib*/*
 
 *.tar.gz
+**/opus*/*
+**/FFmpeg*/*
+**/lame*/*
 
 # Xcode
 #
