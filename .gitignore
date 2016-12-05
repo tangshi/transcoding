@@ -4,6 +4,7 @@
 
 *.dylib
 *.so
+*.a
 *.pc
 */include/lib*/*
 
@@ -12,6 +13,8 @@
 **/FFmpeg*/*
 **/lame*/*
 **/lib/*
+**/share/*
+**/bin/*
 
 # Xcode
 #
