@@ -16,11 +16,13 @@
 /**
  Target audio args
  
+ @sample_rate: pass 0 to use default value 
  @bit_rate: controls the compression rate of target audio, pass 0 to use default value
  @format_name: target media container name,
   see all supported formats name by executing `ffmpeg -formats`
  */
 typedef struct TranscodingArgs {
+    int     sample_rate;
     int64_t bit_rate;
     char   *format_name;
 } TranscodingArgs;
