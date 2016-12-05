@@ -139,6 +139,7 @@ static int set_encoder_params(const TranscodingArgs args,
 
     encoder_ctx->channels = input_ctx->channels;
     encoder_ctx->channel_layout = av_get_default_channel_layout(encoder_ctx->channels);
+    encoder_ctx->sample_fmt = input_ctx->sample_fmt;
 
     if (encoder->channel_layouts != NULL)
     {
@@ -181,17 +182,13 @@ static int set_encoder_params(const TranscodingArgs args,
         {
             encoder_ctx->sample_fmt = encoder->sample_fmts[0];
         }
-        else
-        {
-            encoder_ctx->sample_fmt = input_ctx->sample_fmt;
-        }
     }
     else
     {
-        fprintf(stderr,
-                "Error: don't know the supported sample formats of the encoder %s\n",
+        fprintf(stdout,
+                "Warning: don't know the supported sample formats of the encoder %s, "
+                "using the input sample format by default, though it may crash.\n",
                 encoder->name);
-        return -1;
     }
 
     int sample_rate = args.sample_rate > 0 ? args.sample_rate : input_ctx->sample_rate;
@@ -227,7 +224,13 @@ static int set_encoder_params(const TranscodingArgs args,
     }
     else
     {
-        encoder_ctx->sample_rate = input_ctx->sample_rate;
+        encoder_ctx->sample_rate = sample_rate;
+    }
+
+    // For opus, it's encouraged to always use 48kHz
+    if (encoder->id == AV_CODEC_ID_OPUS)
+    {
+        encoder_ctx->sample_rate = 48000;
     }
 
     if (args.bit_rate > 0)
@@ -271,6 +274,7 @@ static int open_output_stream(const TranscodingArgs args, BufferIO * bio,
     }
 
     // Find the encoder to be used by its name.
+    // av_get_pcm_codec(enum AVSampleFormat fmt, int be)
     encoder_id = av_guess_codec((*output_format_context)->oformat,
                                 NULL, NULL, NULL, AVMEDIA_TYPE_AUDIO);
     output_codec = avcodec_find_encoder(encoder_id);
@@ -304,8 +308,8 @@ static int open_output_stream(const TranscodingArgs args, BufferIO * bio,
     }
 
     // Set the sample rate for the container.
-    stream->time_base.den = input_codec_context->sample_rate;
     stream->time_base.num = 1;
+    stream->time_base.den = avctx->sample_rate;
 
     /*
      Some container formats (like MP4) require global headers to be present
@@ -380,19 +384,25 @@ static int init_resampler(AVCodecContext *input_codec_context,
      are assumed for simplicity (they are sometimes not detected
      properly by the demuxer and/or decoder).
      */
-    *resample_context = swr_alloc_set_opts(NULL,
-                                           output_codec_context->channel_layout,
-                                           output_codec_context->sample_fmt,
-                                           output_codec_context->sample_rate,
-                                           av_get_default_channel_layout(input_codec_context->channels),
-                                           input_codec_context->sample_fmt,
-                                           input_codec_context->sample_rate,
-                                           0, NULL);
+
+    *resample_context = swr_alloc();
+
     if (!(*resample_context))
     {
         fprintf(stderr, "Could not allocate resample context.\n");
         return AVERROR(ENOMEM);
     }
+
+
+    av_opt_set_int(*resample_context, "in_sample_rate", input_codec_context->sample_rate, 0);
+    av_opt_set_sample_fmt(*resample_context, "in_sample_fmt", input_codec_context->sample_fmt, 0);
+    av_opt_set_channel_layout(*resample_context, "in_channel_layout",
+                              av_get_default_channel_layout(input_codec_context->channels), 0);
+
+    av_opt_set_int(*resample_context, "out_sample_rate", output_codec_context->sample_rate, 0);
+    av_opt_set_sample_fmt(*resample_context, "out_sample_fmt", output_codec_context->sample_fmt, 0);
+    av_opt_set_channel_layout(*resample_context, "out_channel_layout",
+                              output_codec_context->channel_layout, 0);
 
     // Open the resampler with the specified parameters.
     error = swr_init(*resample_context);
@@ -411,11 +421,13 @@ static int init_fifo(AVAudioFifo **fifo, AVCodecContext *output_codec_context)
     // Create the FIFO buffer based on the specified output sample format.
     *fifo = av_audio_fifo_alloc(output_codec_context->sample_fmt,
                                 output_codec_context->channels, 1);
+
     if (!fifo)
     {
         fprintf(stderr, "Could not allocate FIFO.\n");
         return AVERROR(ENOMEM);
     }
+    printf("%d \n", av_audio_fifo_size(*fifo));
     return 0;
 }
 
@@ -544,6 +556,10 @@ static int add_samples_to_fifo(AVAudioFifo *fifo,
      Make the FIFO as large as it needs to be to hold both,
      the old and the new samples.
      */
+    if (frame_size <= 0)
+    {
+        return 0;
+    }
     error = av_audio_fifo_realloc(fifo, av_audio_fifo_size(fifo) + frame_size);
     if (error < 0)
     {

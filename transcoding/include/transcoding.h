@@ -20,6 +20,10 @@
  @bit_rate: controls the compression rate of target audio, pass 0 to use default value
  @format_name: target media container name,
   see all supported formats name by executing `ffmpeg -formats`
+ 
+ @note: every argument have to be explicitly assigned.
+
+ @warning: pcm formats currently not supported
  */
 typedef struct TranscodingArgs {
     int     sample_rate;
