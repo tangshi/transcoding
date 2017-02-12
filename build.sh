@@ -20,19 +20,6 @@ cd ..
 
 printf "${GREEN}\n"
 printf "${GREEN}-------------------------------------\n"
-printf "${GREEN}------ start to build libopus -------\n"
-printf "${GREEN}-------------------------------------\n\n${NC}"
-sleep 1
-
-tar -xzf ./dep/opus*.tar.gz -C .
-cd opus*
-./configure --prefix=$prefix_dir --enable-shared=yes --enable-static=no --disable-dependency-tracking --disable-doc --disable-extra-programs --enable-custom-modes
-make -j8 && make install
-cd ..
-
-
-printf "${GREEN}\n"
-printf "${GREEN}-------------------------------------\n"
 printf "${GREEN}----- start to build libfdk-aac -----\n"
 printf "${GREEN}-------------------------------------\n\n${NC}"
 sleep 1
@@ -98,7 +85,6 @@ gcc ./src/io_in_memory.c ./src/transcoding.c -std=c99 -shared -fpic -O2 -I$prefi
 rm -rf bin
 rm -rf share
 rm -rf lame*
-rm -rf opus*
 rm -rf fdk-aac*
 rm -rf ffmpeg*
 

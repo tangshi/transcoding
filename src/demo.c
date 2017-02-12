@@ -35,7 +35,6 @@ int main(int argc, char **argv) {
 
         BufferData dst_buf;
         TranscodingArgs args;
-        args.sample_rate = 48000;
         args.bit_rate = 32000;
 
         int i = 0;
