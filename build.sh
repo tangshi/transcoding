@@ -72,6 +72,7 @@ PKG_CONFIG_PATH="$prefix_dir/lib/pkgconfig" ./configure --prefix=$prefix_dir \
 make -j8 && make install
 cd ..
 
+export export LD_LIBRARY_PATH=$prefix_dir/lib:$LD_LIBRARY_PATH
 
 printf "${GREEN}\n"
 printf "${GREEN}-------------------------------------\n"
@@ -92,6 +93,6 @@ rm -rf ffmpeg*
 printf "${GREEN}\n"
 printf "${GREEN}Note: to build the demo, run this: \n"
 printf
-printf "${GREEN} gcc -o demo.exe ./src/demo.c -std=c99 -I./include -L./lib -ltranscoding -lavutil -lavcodec -lavformat -lswresample -lfdk-aac"
+printf "${GREEN} gcc -o demo.exe ./src/demo.c -std=c99 -I./include -L./lib -ltranscoding\n"
 printf
 printf "${GREEN}----------------- all done ------------------\n\n\n${NC}"
