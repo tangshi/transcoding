@@ -6,6 +6,7 @@
 //
 
 #include <stdio.h>
+#include <string.h>
 #include "transcoding.h"
 
 long get_file_size(FILE *fp) {
@@ -36,7 +37,20 @@ int main(int argc, char **argv) {
         TranscodingArgs args;
         args.sample_rate = 48000;
         args.bit_rate = 32000;
-        args.format_name = "opus";
+
+        int i = 0;
+        int dot = 0;
+        int len = strlen(argv[2]);
+        char format_name[32] = "";
+        while(argv[2][i] != '\0') {
+            if ('.' == argv[2][i]) {
+                dot = i;
+            }
+            i++;
+        }
+
+        strncpy(format_name, argv[2] + dot + 1, 31);
+        args.format_name = format_name;
 
         transcoding(&dst_buf, args, src_buf);
 
