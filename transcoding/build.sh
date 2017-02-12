@@ -52,7 +52,7 @@ printf "${GREEN}-------------------------------------\n\n${NC}"
 
 tar -xzf ./dep/FFmpeg-n3.1.2.tar.gz -C .
 cd FFmpeg-n3.1.2
-./configure --prefix=$prefix_dir \
+PKG_CONFIG_PATH="$prefix_dir/lib/pkgconfig" ./configure --prefix=$prefix_dir \
             --disable-doc \
             --enable-nonfree \
             --extra-cflags="-I$prefix_dir/include" \
