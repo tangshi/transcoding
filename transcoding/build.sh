@@ -11,8 +11,8 @@ printf "${GREEN}----- start to build libmp3lame -----\n"
 printf "${GREEN}-------------------------------------\n\n${NC}"
 sleep 1
 
-tar -xzf ./dep/lame-3.99.5.tar.gz -C .
-cd lame-3.99.5
+tar -xzf ./dep/lame*.tar.gz -C .
+cd lame*
 ./configure --prefix=$prefix_dir --enable-shared=yes --enable-static=no
 make -j8 && make install
 cd ..
@@ -24,8 +24,8 @@ printf "${GREEN}------ start to build libopus -------\n"
 printf "${GREEN}-------------------------------------\n\n${NC}"
 sleep 1
 
-tar -xzf ./dep/opus-1.1.3.tar.gz -C .
-cd opus-1.1.3
+tar -xzf ./dep/opus*.tar.gz -C .
+cd opus*
 ./configure --prefix=$prefix_dir --enable-shared=yes --enable-static=no --disable-dependency-tracking --disable-doc --disable-extra-programs --enable-custom-modes
 make -j8 && make install
 cd ..
@@ -37,8 +37,8 @@ printf "${GREEN}----- start to build libfdk-aac -----\n"
 printf "${GREEN}-------------------------------------\n\n${NC}"
 sleep 1
 
-tar -xzf ./dep/fdk-aac-0.1.5.tar.gz -C .
-cd fdk-aac-0.1.5
+tar -xzf ./dep/fdk-aac*.tar.gz -C .
+cd fdk-aac*
 autoreconf -fiv
 ./configure --prefix=$prefix_dir --enable-static=no
 make -j8 && make install
@@ -50,8 +50,8 @@ printf "${GREEN}-------------------------------------\n"
 printf "${GREEN}------- start to build ffmpeg -------\n"
 printf "${GREEN}-------------------------------------\n\n${NC}"
 
-tar -xzf ./dep/FFmpeg-n3.1.2.tar.gz -C .
-cd FFmpeg-n3.1.2
+tar -xzf ./dep/ffmpeg* -C .
+cd ffmpeg*
 PKG_CONFIG_PATH="$prefix_dir/lib/pkgconfig" ./configure --prefix=$prefix_dir \
             --disable-doc \
             --enable-nonfree \
@@ -97,10 +97,10 @@ gcc ./src/io_in_memory.c ./src/transcoding.c -std=c99 -shared -fpic -O2 -I$prefi
 
 rm -rf bin
 rm -rf share
-rm -rf lame-3.99.5
-rm -rf opus-1.1.3
-rm -rf fdk-aac-0.1.5
-rm -rf FFmpeg-n3.1.2
+rm -rf lame*
+rm -rf opus*
+rm -rf fdk-aac*
+rm -rf ffmpeg*
 
 
 printf "${GREEN}\n"
