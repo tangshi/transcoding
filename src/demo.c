@@ -52,7 +52,12 @@ int main(int argc, char **argv) {
         strncpy(format_name, argv[2] + dot + 1, 31);
         args.format_name = format_name;
 
+        int out_bit_rate; 
+        float out_duration;
         transcoding(&dst_buf, args, src_buf);
+
+        printf("out bit rate: %d\n", out_bit_rate);
+        printf("out duration: %f\n", out_duration);
 
         FILE *dst_file = fopen(argv[2], "wb");
         fwrite(dst_buf.buf, dst_buf.size, 1, dst_file);
