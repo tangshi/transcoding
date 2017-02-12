@@ -428,7 +428,6 @@ static int convert_samples(const uint8_t **input_data,
                              converted_data, frame_size,
                              input_data    , frame_size)) < 0)
     {
-
         fprintf(stderr, "Could not convert input samples.\n");
         return error;
     }
@@ -704,7 +703,8 @@ static int write_output_file_trailer(AVFormatContext *output_format_context)
     }
 }
 
-int transcoding(BufferData *p_dst_buf, const TranscodingArgs args, const BufferData src_buf) {
+int transcoding(BufferData *p_dst_buf, int *out_bit_rate, float *out_duration, const TranscodingArgs args, const BufferData src_buf)
+{
 
     int ret = AVERROR(AVERROR_EXIT);
     AVFormatContext *input_format_context = NULL, *output_format_context = NULL;
@@ -854,6 +854,11 @@ int transcoding(BufferData *p_dst_buf, const TranscodingArgs args, const BufferD
 
     p_dst_buf->buf = bio->buf;
     p_dst_buf->size = bio->size;
+
+    *out_duration = (float)pts / output_codec_context->sample_rate;
+
+    *out_bit_rate = 8 * bio->size / *out_duration;
+    *out_bit_rate = *out_bit_rate - *out_bit_rate % 1000;
 
     ret = 0;
 
