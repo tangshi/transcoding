@@ -78,7 +78,10 @@ PKG_CONFIG_PATH="$prefix_dir/lib/pkgconfig" ./configure --prefix=$prefix_dir \
             --disable-videotoolbox \
             --enable-libmp3lame \
             --enable-libfdk-aac \
-            --enable-libopus
+            --enable-libopus \
+            --disable-encoder=aac \
+            --disable-decoder=aac
+
 make -j8 && make install
 cd ..
 
