@@ -1,6 +1,6 @@
 # transcoding
 
-Tencent job, transcoding audio in memory based on ffmpeg
+transcoding audio in memory buffer based on ffmpeg
 
 ## Download dependencies
 
